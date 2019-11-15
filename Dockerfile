@@ -4,7 +4,7 @@
 
 # It also demonstrates using docker with Vagrant's docker backend.
 
-# Tested on Docker Engine 18.09
+# Tested on Docker Engine 19.03.4
 # To use, enable experimental features in your docker, and/or export DOCKER_BUILDKIT=1
 # Then run `docker build .` as usual.
 
@@ -83,7 +83,7 @@ FROM vagrant-base AS vagrant-with-packages
 # asking for a specific list of packages, but it would be fast because most of
 # the packages are already in the cache container's /var/cache/yum
 COPY ./packagelist.txt .
-RUN --mount=target=/var/cache/yum,source=/var/cache/yum,from=yum-cache \
+RUN --mount=type=cache,target=/var/cache/yum,source=/var/cache/yum,from=yum-cache \
   yum -y install -y $(cat packagelist.txt) > yum.log 2>&1
 
 # Docker's new --mount syntax keeps the yum cache out of our target container.

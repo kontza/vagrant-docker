@@ -10,7 +10,17 @@ This also demonstrates building a yum cache in one stage of a multistage
 build, then installing from that cache in another stage, avoiding both network
 traffic and bloat in the final image.
 
+Tested on Docker Engine 19.03.4.
+
+To use, enable experimental features in your docker, and/or export DOCKER_BUILDKIT=1.<br>
+![Experimental settings](enable_experimental.png)
+
+Then run build almost as usual:
+```
+$ docker build .
+```
+
 ## Project setup
 ```
-vagrant up --provider=docker
+$ vagrant up --provider=docker
 ```
